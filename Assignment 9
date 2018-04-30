@@ -1,0 +1,31 @@
+import processing.sound.*;
+import processing.video.*;
+float volume = .5;
+PImage img;
+Capture reflection;
+SoundFile song;
+// The mirror processing example helped me alot with these codes below
+
+void setup() {
+  size(795,798);
+  img = loadImage("vanity mirror.jpg");
+  // This image is from MisKellyFurniture.com
+  reflection = new Capture(this, 145, 312);
+  reflection.start();
+  //This code is adding a sound effect to the mirror.
+  song = new SoundFile(this, "vibraphon.aiff");
+}
+void mousePressed() {
+  reflection.read();
+     song.play();
+     song.rate(.50);
+}
+void draw() {
+  background(0);
+  image(img, 0, 0);
+  image(img, 0,0, width, height);
+
+// This code cuts out where the live camera comes in to show the reflection. 
+  image(reflection, 284 , 65, 150, 312);
+}
+    
